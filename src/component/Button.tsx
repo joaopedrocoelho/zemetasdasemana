@@ -1,20 +1,24 @@
 import React from "react";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: () => void;
   color: string;
   label: string;
 }
 
-const Button = ({ onClick, color, label }: ButtonProps) => {
+const Button = ({ onClick, color, label, ...attributes }: ButtonProps) => {
   return (
     <button
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
       className={`px-5 py-2.5 font-medium 
       bg-${color}-400 
       text-${color}-900
       rounded-lg 
       text-sm`}
+      {...attributes}
     >
       {label}
     </button>

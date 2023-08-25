@@ -1,23 +1,37 @@
 import React, { useContext } from "react";
 import Button from "./Button";
-import { UserContext } from "@/context/userContext";
-import { authenticate } from "../../firebase";
 import { ModalContext } from "@/context/modalContext";
 import LoginModal from "./modals/LoginModal";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, logout } from "@/firebase/firebase";
 
 const NavBar = () => {
-  const { email, setUser } = useContext(UserContext);
+  const [user, loading, error] = useAuthState(auth);
   const { setModal } = useContext(ModalContext);
+
+  const LogOut = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <nav className="flex w-full p-4 justify-end gap-x-8 items-center">
-      {email && (
+      {user && (
         <>
-          <p>{email}</p>
-          <Button color="red" onClick={() => {}} label="Sair" />
+          <p>{user.email}</p>
+          <Button
+            color="red"
+            onClick={() => {
+              LogOut();
+            }}
+            label="Sair"
+          />
         </>
       )}
-      {!email && (
+      {!user && (
         <>
           <Button
             color="green"

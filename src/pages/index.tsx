@@ -4,36 +4,34 @@ import Goal from "../component/Goal";
 import Header from "../component/Header";
 import NavBar from "../component/NavBar";
 import ProgressBar from "../component/ProgressBar";
-import { UserContext } from "@/context/userContext";
 import { ModalContext } from "@/context/modalContext";
 import Modal from "@/component/modals/Modal";
+import { set } from "firebase/database";
 
 export default function Home() {
-  const [email, setUser] = useState<string>("");
   const [modal, setNewModal] = useState<JSX.Element | null>(null);
-  const modalRef = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   const setModal = (modal: JSX.Element | null) => {
     setNewModal(modal);
-    modalRef.current?.showModal();
+    setOpen(true);
   };
 
-  useEffect(() => {
-    console.log("modal", modal);
-  }, [modal]);
+  const closeModal = () => {
+    setOpen(false);
+    setNewModal(null);
+  };
 
   return (
-    <ModalContext.Provider value={{ Modal: modal, setModal }}>
-      <UserContext.Provider value={{ email, setUser }}>
-        {modal && <Modal ref={modalRef}>{modal}</Modal>}
-        <NavBar />
-        <main className="w-full flex flex-col px-[5%] items-center pt-[5%] pb-20">
-          <Header />
-          <ProgressBar />
-          <Goal />
-          <AdminBtns />
-        </main>
-      </UserContext.Provider>
+    <ModalContext.Provider value={{ Modal: modal, setModal, closeModal, open }}>
+      {modal && <Modal>{modal}</Modal>}
+      <NavBar />
+      <main className="w-full flex flex-col px-[5%] items-center pt-[5%] pb-20">
+        <Header />
+        <ProgressBar />
+        <Goal />
+        <AdminBtns />
+      </main>
     </ModalContext.Provider>
   );
 }
