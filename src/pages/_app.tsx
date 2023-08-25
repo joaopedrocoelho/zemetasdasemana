@@ -2,6 +2,17 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect } from "react";
+import localFont from "next/font/local";
+
+export const nougat = localFont({
+  src: "nougat.ttf",
+  variable: "--font-nougat",
+});
+
+export const lilita = localFont({
+  src: "LilitaOne-Regular.ttf",
+  variable: "--font-lilita",
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -23,6 +34,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Metas da Semana</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <style>{`
+          :root {
+            --font-nougat: ${nougat.style.fontFamily};
+            --font-lilita: ${lilita.style.fontFamily};
+          }
+        `}</style>
       </Head>
       <Component {...pageProps} />
     </>
