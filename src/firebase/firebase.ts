@@ -17,8 +17,10 @@ import {
   increment,
   setDoc,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { Goal } from "./models";
+import { write } from "fs";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -69,14 +71,26 @@ const addGoal = async (goal: Goal): Promise<void> => {
 
 const markGoalAsDone = async (id: string, worth: number): Promise<void> => {
   const goalRef = doc(db, "activeGoals", id);
+  const semanalRef = doc(db, "activeWeek", "semanal");
+
+  const batch = writeBatch(db);
   console.log(goalRef);
-  await updateDoc(goalRef, { points: increment(worth) });
+  batch.update(goalRef, { points: increment(worth) });
+  batch.update(semanalRef, { currentPoints: increment(worth) });
+
+  await batch.commit();
 };
 
 const markGoalAsUnDone = async (id: string, worth: number): Promise<void> => {
   const goalRef = doc(db, "activeGoals", id);
+  const semanalRef = doc(db, "activeWeek", "semanal");
+
+  const batch = writeBatch(db);
   console.log(goalRef);
-  await updateDoc(goalRef, { points: increment(-worth) });
+  batch.update(goalRef, { points: increment(-worth) });
+  batch.update(semanalRef, { currentPoints: increment(-worth) });
+
+  await batch.commit();
 };
 
 const editGoal = async (id: string, goal: Goal): Promise<void> => {

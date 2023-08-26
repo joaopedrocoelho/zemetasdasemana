@@ -12,6 +12,7 @@ const ProgressBar = ({
   targetPoints,
 }: Omit<activeWeek, "updatedAt" | "deadline" | "award">) => {
   const [user, loading, error] = useAuthState(auth);
+  const percentage = (currentPoints / targetPoints) * 100;
 
   const { setModal } = useContext(ModalContext);
   return (
@@ -20,7 +21,12 @@ const ProgressBar = ({
         {currentPoints} / {targetPoints} pontos
       </h3>
       <div className="w-full flex h-11 bg-slate-100 rounded-full  p-1 ">
-        <div className="bg-blue-400 w-1/2 rounded-full relative transition-all">
+        <div
+          className="bg-blue-400 rounded-full relative transition-all"
+          style={{
+            width: `${percentage}%`,
+          }}
+        >
           <GuriOutline className="w-14 absolute -right-[1.5rem]  -translate-y-[25%] drop-shadow-md" />
         </div>
       </div>
