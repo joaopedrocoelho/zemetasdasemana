@@ -8,13 +8,16 @@ import { ModalContext } from "@/context/modalContext";
 const EditPoints = () => {
   const [currentPoints, setCurrentPoints] = useState("0");
   const [goalPoints, setGoalPoints] = useState("0");
-  const { setModal } = useContext(ModalContext);
+  const { closeModal } = useContext(ModalContext);
 
   const handleSave = async () => {
     console.log("Salvando...");
     try {
-      await editPoints(parseInt(currentPoints), parseInt(goalPoints));
-      setModal(null);
+      await editPoints(parseInt(currentPoints), parseInt(goalPoints)).then(
+        () => {
+          closeModal();
+        }
+      );
     } catch (error) {
       console.log(error);
     }

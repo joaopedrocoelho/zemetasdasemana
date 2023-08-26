@@ -5,12 +5,13 @@ import { ModalContext } from "@/context/modalContext";
 
 const EditAward = () => {
   const [award, setAward] = useState("");
-  const { setModal } = useContext(ModalContext);
+  const { closeModal } = useContext(ModalContext);
 
   const handleSave = async () => {
     try {
-      await editAward(award);
-      setModal(null);
+      await editAward(award).then(() => {
+        closeModal();
+      });
     } catch (error) {
       console.log(error);
     }

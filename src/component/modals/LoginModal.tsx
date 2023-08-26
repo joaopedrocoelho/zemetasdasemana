@@ -12,8 +12,9 @@ const LoginModal = () => {
 
   const Login = async () => {
     try {
-      await login(email, password);
-      closeModal();
+      await login(email, password).then(() => {
+        closeModal();
+      });
     } catch (error) {
       setError(JSON.stringify(error));
     }

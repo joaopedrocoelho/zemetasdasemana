@@ -21,7 +21,7 @@ const Modal = ({ children, onClose }: Props) => {
 
   return (
     <dialog
-      className="w-screen z-20 h-screen max-w-full max-h-full bg-black/20 flex justify-center items-center m-0"
+      className="w-screen z-20 h-screen max-w-full max-h-full bg-black/20 flex justify-center items-center m-0 relative"
       ref={modalRef}
     >
       <div className="bg-white rounded-3xl w-86 flex flex-col gap-y-6 p-6 pt-16 relative shadow-md m-auto">
@@ -31,11 +31,11 @@ const Modal = ({ children, onClose }: Props) => {
             onClose && onClose();
             closeModal();
           }}
+          className="absolute right-4 top-4 "
         >
           <IconContext.Provider
             value={{
-              className:
-                "absolute right-4 top-4 cursor-pointer stroke-blue-500",
+              className: "acursor-pointer stroke-blue-500",
               size: "2rem",
             }}
           >
