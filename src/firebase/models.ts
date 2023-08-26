@@ -1,13 +1,13 @@
 export interface Goal {
-  id: string;
   title: string;
   points: number;
   worth: number;
 }
 
-export interface WeeklyGoalsData {
+export interface activeWeek {
   award: string;
   currentPoints: number;
   targetPoints: number;
-  metas: Goal[];
+  updatedAt: number;
+  deadline: number;
 }

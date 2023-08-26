@@ -12,6 +12,7 @@ body {
   background-size: cover;
   background-blend-mode: normal;
   position: relative;
+  min-height: 100vh;
 }
 
 body::before {

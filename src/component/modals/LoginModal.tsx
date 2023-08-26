@@ -19,14 +19,7 @@ const LoginModal = () => {
     }
   };
   return (
-    <form
-      className="flex flex-col gap-y-6 w-[200px]"
-      onSubmit={(e) => {
-        e.preventDefault();
-        Login();
-      }}
-      id="login"
-    >
+    <form className="flex flex-col gap-y-6 w-[200px]" id="login">
       <input
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
         type="email"
@@ -49,7 +42,15 @@ const LoginModal = () => {
         }}
         required
       />
-      <Button color="green" onClick={() => {}} label="Entrar" />
+      <Button
+        color="green"
+        onClick={() => {
+          console.log("submit");
+          Login();
+        }}
+        label="Entrar"
+        type="submit"
+      />
     </form>
   );
 };

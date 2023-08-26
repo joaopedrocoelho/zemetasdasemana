@@ -7,6 +7,8 @@ import ProgressBar from "../component/ProgressBar";
 import { ModalContext } from "@/context/modalContext";
 import Modal from "@/component/modals/Modal";
 import { set } from "firebase/database";
+import ActiveWeek from "@/component/ActiveWeek";
+import ActiveGoals from "@/component/ActiveGoals";
 
 export default function Home() {
   const [modal, setNewModal] = useState<JSX.Element | null>(null);
@@ -27,10 +29,8 @@ export default function Home() {
       {modal && <Modal>{modal}</Modal>}
       <NavBar />
       <main className="w-full flex flex-col px-[5%] items-center pt-[5%] pb-20">
-        <Header />
-        <ProgressBar />
-        <Goal />
-        <AdminBtns />
+        <ActiveWeek />
+        <ActiveGoals />
       </main>
     </ModalContext.Provider>
   );

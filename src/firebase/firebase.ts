@@ -7,7 +7,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  deleteDoc,
+  doc,
+  getFirestore,
+  increment,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { Goal } from "./models";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -39,7 +49,7 @@ const logout = async (): Promise<void> => {
 };
 
 const editAward = async (award: string): Promise<void> => {
-  const semanalRef = doc(db, "metas", "semanal");
+  const semanalRef = doc(db, "activeWeek", "semanal");
   console.log(semanalRef);
   await updateDoc(semanalRef, { award });
 };
@@ -48,21 +58,40 @@ const editPoints = async (
   currentPoints: number,
   targetPoints: number
 ): Promise<void> => {
-  const semanalRef = doc(db, "metas", "semanal");
+  const semanalRef = doc(db, "activeWeek", "semanal");
   await updateDoc(semanalRef, { currentPoints, targetPoints });
 };
 
-const addGoal = async (goal: Goal): Promise<void> => {};
+const addGoal = async (goal: Goal): Promise<void> => {
+  const activeGoalsREf = collection(db, "activeGoals");
+  await addDoc(activeGoalsREf, goal);
+};
 
-const markGoalAsDone = async (id: string): Promise<void> => {};
+const markGoalAsDone = async (id: string, worth: number): Promise<void> => {
+  const goalRef = doc(db, "activeGoals", id);
+  console.log(goalRef);
+  await updateDoc(goalRef, { points: increment(worth) });
+};
 
-const markGoalAsUnDone = async (id: string): Promise<void> => {};
+const markGoalAsUnDone = async (id: string, worth: number): Promise<void> => {
+  const goalRef = doc(db, "activeGoals", id);
+  console.log(goalRef);
+  await updateDoc(goalRef, { points: increment(-worth) });
+};
 
-const editGoal = async (id: string): Promise<void> => {};
+const editGoal = async (id: string, goal: Goal): Promise<void> => {
+  const goalRef = doc(db, "activeGoals", id);
+  console.log(goalRef);
+  await updateDoc(goalRef, { ...goal });
+};
 
-const deleteGoal = async (id: string): Promise<void> => {};
+const deleteGoal = async (id: string): Promise<void> => {
+  const goalRef = doc(db, "activeGoals", id);
+  console.log(goalRef);
+  await deleteDoc(goalRef);
+};
 
-export { app, auth, login, logout };
+export { app, db, auth, login, logout };
 export {
   editAward,
   editPoints,
