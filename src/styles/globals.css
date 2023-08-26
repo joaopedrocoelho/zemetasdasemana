@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 132, 253, 1) 0%,
+    rgba(145, 253, 255, 1) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: normal;
+  position: relative;
+}
+
+body::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(#06004a 20%, transparent 20%);
+  background-position: 0 0, 25px 25px;
+  background-size: 25px 25px;
+  background-blend-mode: multiply;
+  opacity: 0.1;
+  z-index: -1;
+}

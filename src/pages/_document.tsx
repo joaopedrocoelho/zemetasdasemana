@@ -165,7 +165,7 @@ export default function Document() {
           media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
         />
       </Head>
-      <body className="bg-blue-100">
+      <body>
         <Main />
         <NextScript />
       </body>

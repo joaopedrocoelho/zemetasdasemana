@@ -3,17 +3,17 @@ import Button from "./Button";
 
 const Goal = () => {
   return (
-    <section className="flex flex-col w-full bg-slate-100 px-2.5 py-2.5 rounded-lg drop-shadow-sm">
+    <section className="flex flex-col w-full bg-slate-100 px-2.5 py-2.5 rounded-lg drop-shadow-md">
       <div className="flex items-center justify-normal mb-2 gap-x-4">
-        <h3 className="font-bold text-xl">
+        <h3 className="font-lilita tracking-wider text-xl">
           Nome da meta Nome da meta Nome da meta
         </h3>
         <div
           className="ml-auto flex flex-col justify-center items-center 
         px-2.5 py-2 bg-orange-300 rounded-md text-orange-900"
         >
-          <span className=" text-2xl font-extrabold">20</span>
-          <span className="text-sm">pontos</span>
+          <span className=" text-4xl font-lilita">20</span>
+          <span className="text-sm font-lilita tracking-wider">pontos</span>
         </div>
       </div>
       <h6 className="text-base mb-8 font-light">Feita 3 vezes essa semana</h6>

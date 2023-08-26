@@ -17,6 +17,7 @@ const Button = ({ onClick, color, label, ...attributes }: ButtonProps) => {
       bg-${color}-400 
       text-${color}-900
       rounded-lg 
+      drop-shadow-md
       text-sm`}
       {...attributes}
     >
