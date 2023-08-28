@@ -8,14 +8,14 @@ import { ModalContext } from "@/context/modalContext";
 
 const EditGoal = () => {
   const [title, setTitle] = useState("");
-  const [goalPoints, setGoalPoints] = useState(0);
+  const [goalPoints, setGoalPoints] = useState("0");
   const { closeModal } = useContext(ModalContext);
 
   const handleSave = async () => {
     try {
       const goal: Goal = {
         title,
-        worth: goalPoints,
+        worth: parseInt(goalPoints),
         points: 0,
       };
       console.log("adding goal...", goal);
@@ -41,11 +41,11 @@ const EditGoal = () => {
       <label className="font-bold">Valor da meta:</label>
       <Input
         onChange={(e) => {
-          setGoalPoints(parseInt(e.target.value));
+          setGoalPoints(e.target.value);
         }}
-        type="number"
-        placeholder={goalPoints.toString()}
-        value={goalPoints.toString()}
+        type="string"
+        placeholder={goalPoints}
+        value={goalPoints}
       />
       <Button
         color="green"

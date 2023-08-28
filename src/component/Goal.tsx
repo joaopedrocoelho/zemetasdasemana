@@ -80,7 +80,6 @@ const GoalComponent = ({ title, id, points, worth }: Props) => {
 
 const DeleteIcon = ({ id }: { id: string }) => {
   const { setModal } = useContext(ModalContext);
-  console.log("delete icon", id);
   return (
     <button
       type="button"

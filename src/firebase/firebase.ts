@@ -105,6 +105,15 @@ const deleteGoal = async (id: string): Promise<void> => {
   await deleteDoc(goalRef);
 };
 
+const updateDates = async (
+  deadline: number,
+  updatedAt: number
+): Promise<void> => {
+  const semanalRef = doc(db, "activeWeek", "semanal");
+  console.log(semanalRef);
+  await updateDoc(semanalRef, { deadline, updatedAt });
+};
+
 export { app, db, auth, login, logout };
 export {
   editAward,
@@ -114,4 +123,5 @@ export {
   markGoalAsUnDone,
   editGoal,
   deleteGoal,
+  updateDates,
 };
