@@ -1,7 +1,7 @@
 # Metas da semana
 
 
-A tracker for a child's weekly chores.
+A tracker for a child's weekly chores. Live demo [`here`](https://zemetasdasemana-1ry3.vercel.app/)
 ![screenshot-rocks](https://github.com/user-attachments/assets/0201ed02-cc39-4c2f-8010-40248a2f7915)
 
 
